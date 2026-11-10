@@ -1,0 +1,7 @@
+__pycache__
+*.pt
+*.json
+runs/
+weights/
+2306.07303v1.pdf
+wandb/
