@@ -31,7 +31,7 @@ class FeedForwardBlock(nn.Module):
         # (batch, seq_len, d_model) --> (batch, seq_len, d_ff) --> (batch, seq_len, d_model)
         return self.linear_2(self.dropout(torch.relu(self.linear_1(x))))
 
-class InputEmbeddings(nn.Module):
+class InputEmbeddings(nn.Module): # 1st
 
     def __init__(self, d_model: int, vocab_size: int) -> None:
         super().__init__()
@@ -44,7 +44,7 @@ class InputEmbeddings(nn.Module):
         # Multiply by sqrt(d_model) to scale the embeddings according to the paper
         return self.embedding(x) * math.sqrt(self.d_model)
     
-class PositionalEncoding(nn.Module):
+class PositionalEncoding(nn.Module): # 2nd
 
     def __init__(self, d_model: int, seq_len: int, dropout: float) -> None:
         super().__init__()
@@ -58,9 +58,9 @@ class PositionalEncoding(nn.Module):
         # Create a vector of shape (d_model)
         div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model)) # (d_model / 2)
         # Apply sine to even indices
-        pe[:, 0::2] = torch.sin(position * div_term) # sin(position * (10000 ** (2i / d_model))
+        pe[:, 0::2] = torch.sin(position * div_term) # sin(position * (10000 ** (2i / d_model)) # start from 0, step by 2 -> 0, 2, 4, 6...
         # Apply cosine to odd indices
-        pe[:, 1::2] = torch.cos(position * div_term) # cos(position * (10000 ** (2i / d_model))
+        pe[:, 1::2] = torch.cos(position * div_term) # cos(position * (10000 ** (2i / d_model)) # start from 1, step by 2 -> 1, 3, 5, 7...
         # Add a batch dimension to the positional encoding
         pe = pe.unsqueeze(0) # (1, seq_len, d_model)
         # Register the positional encoding as a buffer
