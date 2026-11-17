@@ -70,7 +70,7 @@ class PositionalEncoding(nn.Module): # 2nd
         x = x + (self.pe[:, :x.shape[1], :]).requires_grad_(False) # (batch, seq_len, d_model)
         return self.dropout(x)
 
-class ResidualConnection(nn.Module):
+class ResidualConnection(nn.Module):  
     
         def __init__(self, features: int, dropout: float) -> None:
             super().__init__()
