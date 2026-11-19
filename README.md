@@ -133,7 +133,7 @@ Both notebooks load a specific checkpoint by epoch number, so adjust the epoch i
 5. **Inference**: greedy decoding picks the highest-probability token at each step;
    beam search keeps the top-*k* hypotheses.
 
-## Notes
+## Notes 
 
 - `.gitignore` excludes checkpoints (`*.pt`), tokenizer files (`*.json`), `runs/`,
   `weights/` and `wandb/`, so these are regenerated locally by training.
