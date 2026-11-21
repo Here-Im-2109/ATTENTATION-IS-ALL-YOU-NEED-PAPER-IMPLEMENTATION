@@ -81,6 +81,7 @@ class ResidualConnection(nn.Module):
         def forward(self, x, sublayer):
             return x + self.dropout(sublayer(self.norm(x)))
 
+
 class MultiHeadAttentionBlock(nn.Module):
 
     def __init__(self, d_model: int, h: int, dropout: float) -> None:
